@@ -15,19 +15,39 @@ public class Player {
     public static double damage;
     
     public static void move() {
-        if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
+        if (StdDraw.isKeyPressed(KeyEvent.VK_W) && StdDraw.isKeyPressed(KeyEvent.VK_D)) {
+            if (xVel < speed) xVel+=accel*0.707;
+            if (yVel < speed) yVel+=accel*0.707;
+        }
+        
+        else if (StdDraw.isKeyPressed(KeyEvent.VK_W) && StdDraw.isKeyPressed(KeyEvent.VK_A)) {
+            if (xVel < speed) xVel-=accel*0.707;
+            if (yVel < speed) yVel+=accel*0.707;
+        }
+        
+        else if (StdDraw.isKeyPressed(KeyEvent.VK_S) && StdDraw.isKeyPressed(KeyEvent.VK_D)) {
+            if (xVel < speed) xVel+=accel*0.707;
+            if (yVel < speed) yVel-=accel*0.707;
+        }
+        
+        else if (StdDraw.isKeyPressed(KeyEvent.VK_S) && StdDraw.isKeyPressed(KeyEvent.VK_A)) {
+            if (xVel < speed) xVel-=accel*0.707;
+            if (yVel < speed) yVel-=accel*0.707;
+        }
+        
+        else if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
             if (xVel < speed) xVel+=accel;
         }
         
-        if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
+        else if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
             if (xVel > -speed) xVel-=accel;
         }
         
-        if (StdDraw.isKeyPressed(KeyEvent.VK_W)) {
+        else if (StdDraw.isKeyPressed(KeyEvent.VK_W)) {
             if (yVel < speed) yVel+=accel;
         }
         
-        if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+        else if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
             if (yVel > -speed) yVel-=accel;
         }
         
@@ -44,6 +64,10 @@ public class Player {
         if (x < size) x = size;
         if (y > 200 - size) y = 200 - size;
         if (y < size) y = size;
+    }
+    
+    public static void shoot() {
+        
     }
     
     public static void draw() {
