@@ -12,10 +12,14 @@ public class Player {
     public static double decel = 0.98;
 
     public static double speed = 1.0;
-    public static double shotSpeed;
+    public static double shotSpeed = 1.0;
+    public static double shotRate = 1.0;
     public static double damage;
+    
+    public static double delay = shotRate * 10;
 
     public static List<List<Double>> tears = new ArrayList<List<Double>>();
+    //x,y,xvel,yvel
 
     public static void move() {
         if (StdDraw.isKeyPressed(KeyEvent.VK_W) && StdDraw.isKeyPressed(KeyEvent.VK_D)) {
@@ -64,7 +68,12 @@ public class Player {
 
     public static void shoot() {
         if (StdDraw.isKeyPressed(KeyEvent.VK_UP)) {
-            
+            List<Double> temp = new ArrayList<Double>();
+            temp.add(x);
+            temp.add(y);
+            temp.add(0.0);
+            temp.add(shotSpeed);
+            tears.add(temp);
         }
     }
 
@@ -107,10 +116,16 @@ public class Player {
     public static void draw() {
         StdDraw.setPenColor(245, 160, 120);
         StdDraw.filledCircle(x, y, size);
+        StdDraw.setPenColor(120,220,255);
+        
+        for (int i=0;i<tears.size();i++) {
+            StdDraw.filledCircle(tears.get(i).get(0),tears.get(i).get(1),2);
+        }
     }
 
     public static void update() {
         draw();
         move();
+        shoot();
     }
 }
